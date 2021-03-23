@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template"/>
+        <meta name="author" content="Crud"/>
+        <title>Student Records</title>
+        <!-- Bootstrap CSS -->
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <!-- bootstrap theme -->
+        <h:outputStylesheet name="css/bootstrap-theme.css"/>
+        <!-- font icon -->
+        <h:outputStylesheet name="css/elegant-icons-style.css"/>
+        <!--<h:outputStylesheet name="css/font-awesome.css"/>-->
+        <h:outputStylesheet name="css/font-awesome.min.css"/>
+        <!-- Custom styles -->
+        <h:outputStylesheet name="css/style.css"/>
+        <h:outputStylesheet name="css/style-responsive.css"/>
+
+    </h:head>
+    <h:body>
+        <center><h2><h:outputText value="Students Records"/></h2></center>
+        <center><h2>Welcome #{login.user} <i class="fa fa-sign-out"></i></h2></center>
+        <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+            <h:form id="studentForm">
+                <h:dataTable id="studenttable" var="s" binding="#{table}" value="#{studentBean.studentList()}" class="table table-striped table-hover table-bordered tableUpdated">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputText value="#{table.rowIndex + 1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{s.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                        <h:outputText value="#{s.email}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Password</f:facet>
+                        <h:outputText value="#{s.password}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Gender</f:facet>
+                        <h:outputText value="#{s.gender}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Address</f:facet>
+                        <h:outputText value="#{s.address}"/>
+                    </h:column>
+                    <h:column>                        
+                        <f:facet name="header">EDIT</f:facet>
+
+                        <h:commandLink action="#{studentBean.edit(s.id)}" value="Edit" styleClass="btn btn-success btn btn-sm">
+                            <span class="fa fa-edit"></span>   
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <p:commandLink action="#{studentBean.delete(s.id)}" value="Delete" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i> 
+                        </p:commandLink>
+                    </h:column>
+                </h:dataTable>
+                <center>
+                    <p:commandLink id="new" action="new.xhtml?faces-redirect=true" value="Create New" styleClass="btn btn-primary btn-sm">
+                        <i class="fa fa-paper-plane"></i>
+                    </p:commandLink>
+
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-20">
+                            <h:commandLink action="#{login.logout}" styleClass="btn btn-primary btn-sm" value="Logout" >
+                                           <i class="fa fa-sign-out"></i>
+                            </h:commandLink>
+                        </div>
+                    </div>
+                </center>
+            </h:form>
+        </section>     
+    </h:body>
+</html>
+
